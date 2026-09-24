@@ -1,1 +1,700 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ana no Projeto Marcos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-canvas: #f2f5f9;
+      --navy-dark: #042340;
+      --blue-medium: #3b629b;
+      --blue-card-left: #30588c;
+      --blue-card-right: #7da0cd;
+      --blue-container: #4c749a;
+      --slate-teal: #507983;
+      --white: #ffffff;
+      --text-dark: #042340;
+    }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-canvas);
+      color: var(--text-dark);
+      display: flex;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+    }
+
+    .site-wrapper {
+      width: 100%;
+      max-width: 720px;
+      background-color: #ffffff;
+      box-shadow: 0 0 30px rgba(0,0,0,0.08);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+    header {
+      background-color: var(--navy-dark);
+      color: var(--white);
+      padding: 2.5rem 1.5rem 2rem 1.5rem;
+      border-radius: 0 0 24px 24px;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .polaroids {
+      display: flex;
+      position: relative;
+      width: 130px;
+      height: 100px;
+      flex-shrink: 0;
+    }
+
+    .polaroid {
+      position: absolute;
+      width: 75px;
+      height: 85px;
+      background: #fff;
+      padding: 5px 5px 15px 5px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      border-radius: 4px;
+    }
+
+    .polaroid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background-color: #dce5f0;
+    }
+
+    .polaroid-1 {
+      transform: rotate(-10deg);
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    .polaroid-2 {
+      transform: rotate(8deg);
+      top: 15px;
+      left: 45px;
+      z-index: 2;
+    }
+
+    .header-title {
+      flex: 1;
+    }
+
+    .header-title span {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .header-title h1 {
+      font-size: 1.8rem;
+      font-weight: 900;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    /* TIMELINE */
+    .timeline {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin-top: 1rem;
+      padding: 0 0.5rem;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 22px;
+      left: 15%;
+      right: 15%;
+      height: 2px;
+      background-color: rgba(255, 255, 255, 0.4);
+      z-index: 1;
+    }
+
+    .timeline-item {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      flex: 1;
+    }
+
+    .timeline-year {
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .timeline-pin {
+      width: 14px;
+      height: 14px;
+      background-color: #e74c3c;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      margin: 0 auto 8px auto;
+      border: 2px solid #fff;
+    }
+
+    .timeline-text {
+      font-size: 0.65rem;
+      font-weight: 600;
+      line-height: 1.2;
+      max-width: 110px;
+      margin: 0 auto;
+      opacity: 0.95;
+    }
+
+    /* MAIN CONTENT */
+    main {
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* GRID DE INFO (O QUE É / O QUE VOU ESTUDAR) */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .info-card {
+      border-radius: 16px;
+      padding: 1.5rem;
+      color: var(--white);
+    }
+
+    .card-o-que-e {
+      background-color: var(--blue-card-left);
+    }
+
+    .card-estudar {
+      background-color: var(--blue-card-right);
+    }
+
+    .info-card h2 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 0.8rem;
+    }
+
+    .info-card p {
+      font-size: 0.82rem;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    .info-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .info-card li {
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    .info-card li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      font-size: 1rem;
+    }
+
+    /* COMO FAZER PARTE */
+    .section-fazer-parte h2.main-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--navy-dark);
+      margin-bottom: 1rem;
+    }
+
+    /* TABS ESTILO PASTA */
+    .folder-tabs {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .folder-tab {
+      flex: 1;
+      padding: 0.8rem 1rem;
+      border: none;
+      border-radius: 14px 14px 0 0;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+
+    .folder-tab.active {
+      background-color: var(--blue-container);
+      color: var(--white);
+    }
+
+    .folder-tab.inactive {
+      background-color: var(--blue-card-right);
+      color: var(--white);
+      opacity: 0.85;
+    }
+
+    /* CONTENT BOX */
+    .fazer-parte-container {
+      background-color: var(--blue-container);
+      border-radius: 0 0 20px 20px;
+      padding: 1.5rem;
+      color: var(--white);
+    }
+
+    /* PROGRESS BAR AREA */
+    .progress-section {
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 1.2rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    .progress-top-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+      gap: 1rem;
+    }
+
+    @media (max-width: 500px) {
+      .progress-top-info {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .meta-text {
+      font-size: 0.85rem;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+
+    .progress-bar-bg {
+      height: 18px;
+      background-color: rgba(255, 255, 255, 0.4);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 0.8rem;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background-color: var(--white);
+      width: 0%;
+      transition: width 1s ease-in-out;
+      border-radius: 10px;
+    }
+
+    .progress-legend {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .legend-box {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    /* PIX CARDS LADO A LADO */
+    .pix-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      .pix-cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pix-white-card {
+      background-color: var(--white);
+      color: var(--text-dark);
+      border-radius: 16px;
+      padding: 1.2rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    .pix-white-card h3 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--navy-dark);
+      margin-bottom: 0.8rem;
+    }
+
+    .pix-qr-img {
+      width: 160px;
+      height: 160px;
+      object-fit: contain;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      margin-bottom: 0.8rem;
+    }
+
+    .btn-copy-pix {
+      width: 100%;
+      background-color: var(--blue-medium);
+      color: var(--white);
+      border: none;
+      padding: 0.6rem;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-copy-pix:hover {
+      background-color: var(--navy-dark);
+    }
+
+    /* ABA ORANDO */
+    .prayer-container {
+      background-color: var(--white);
+      color: var(--text-dark);
+      border-radius: 16px;
+      padding: 1.5rem;
+    }
+
+    .prayer-container ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .prayer-container li {
+      background-color: var(--bg-canvas);
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-left: 4px solid var(--blue-medium);
+    }
+
+    /* FOOTER VERSE */
+    .verse-footer {
+      text-align: center;
+      padding: 1rem 1.5rem 2.5rem 1.5rem;
+      margin-top: auto;
+    }
+
+    .verse-footer p {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--navy-dark);
+      line-height: 1.5;
+      max-width: 580px;
+      margin: 0 auto 0.4rem auto;
+    }
+
+    .verse-footer cite {
+      font-size: 0.85rem;
+      font-weight: 900;
+      color: var(--navy-dark);
+      font-style: normal;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="site-wrapper">
+
+    <!-- HEADER -->
+    <header>
+      <div class="header-top">
+        <div class="polaroids">
+          <div class="polaroid polaroid-1">
+            <img src="https://via.placeholder.com/150" id="header-photo-1" alt="Foto Ana 1">
+          </div>
+          <div class="polaroid polaroid-2">
+            <img src="https://via.placeholder.com/150" id="header-photo-2" alt="Foto Ana 2">
+          </div>
+        </div>
+        <div class="header-title">
+          <span>Ana no</span>
+          <h1>PROJETO MARCOS</h1>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">2026</div>
+          <div class="timeline-pin"></div>
+          <div class="timeline-text">em busca de mantenedores</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2027</div>
+          <div class="timeline-pin"></div>
+          <div class="timeline-text">PROJETO MARCOS</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2028</div>
+          <div class="timeline-pin"></div>
+          <div class="timeline-text">Retornar à Toledo e servir a igreja</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+      <!-- CARDS INFORMATIVOS -->
+      <section class="info-grid">
+        <div class="info-card card-o-que-e">
+          <h2>O que é?</h2>
+          <p>
+            Projeto Marcos é um curso de 1 ano, residente no Instituto Missionário Palavra da Vida (Benevides/PA) com Formação em Teologia e Vida Cristã.
+          </p>
+        </div>
+
+        <div class="info-card card-estudar">
+          <h2>O que vou estudar?</h2>
+          <ul>
+            <li>Teologia Sistemática;</li>
+            <li>Evangelismo e Discipulado;</li>
+            <li>Treinamentos ministeriais;</li>
+            <li>Educação Infantil e Novas Gerações;</li>
+            <li>Vocação Ministerial;</li>
+            <li>Várias outras disciplinas práticas e teóricas.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- COMO FAZER PARTE -->
+      <section class="section-fazer-parte">
+        <h2 class="main-title">Como fazer parte?</h2>
+
+        <div class="folder-tabs">
+          <button class="folder-tab active" id="btn-tab-financeiro" onclick="switchTab('financeiro')">Sendo um Mantenedor</button>
+          <button class="folder-tab inactive" id="btn-tab-oracao" onclick="switchTab('oracao')">Orando</button>
+        </div>
+
+        <!-- CONTEÚDO FINANCEIRO -->
+        <div id="tab-financeiro" class="fazer-parte-container">
+          
+          <div class="progress-section">
+            <div class="progress-top-info">
+              <div class="meta-text">
+                META: R$ <span id="val-meta">1000,00</span> Mensais<br>
+                de Fevereiro à Novembro de 2027
+              </div>
+            </div>
+
+            <div class="progress-bar-bg">
+              <div id="progress-bar" class="progress-bar-fill"></div>
+            </div>
+
+            <div class="progress-legend">
+              <div class="legend-item"><span class="legend-box" style="background:#fff"></span> Economias: R$ <span id="val-economias">0</span></div>
+              <div class="legend-item"><span class="legend-box" style="background:#c0d5ed"></span> Mantenedores: R$ <span id="val-mantenedores">0</span></div>
+              <div class="legend-item"><span class="legend-box" style="background:rgba(255,255,255,0.4)"></span> Faltante: R$ <span id="val-faltante">0</span></div>
+            </div>
+          </div>
+
+          <div class="pix-cards-grid">
+            
+            <!-- CARD UMA ÚNICA VEZ -->
+            <div class="pix-white-card">
+              <h3>Uma única vez</h3>
+              <img id="qr-unico" src="" alt="QR Code PIX Único" class="pix-qr-img" />
+              <button class="btn-copy-pix" onclick="copyPix('unico')">Copiar Código PIX</button>
+            </div>
+
+            <!-- CARD DURANTE OS 10 MESES -->
+            <div class="pix-white-card">
+              <h3>Durante os 10 meses</h3>
+              <img id="qr-mensal" src="" alt="QR Code PIX Mensal" class="pix-qr-img" />
+              <button class="btn-copy-pix" onclick="copyPix('mensal')">Copiar Código PIX</button>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- CONTEÚDO ORAÇÃO -->
+        <div id="tab-oracao" class="fazer-parte-container" style="display: none;">
+          <div class="prayer-container"
+            <ul id="prayer-list"></ul>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- FOOTER VERSE -->
+    <footer class="verse-footer">
+      <p>
+        "Portanto, meus amados irmãos, sejam firmes, inabaláveis e sempre abundantes na obra do Senhor, sabendo que, no Senhor, o trabalho de vocês não é vão."
+      </p>
+      <cite>1ª Coríntios 15:58</cite>
+    </footer>
+
+  </div>
+
+  <script>
+    /* ========================================================================
+       CONFIGURAÇÃO DO SITE - ALTERE APENAS OS VALORES ABAIXO NO GITHUB
+       ======================================================================== */
+    const SITE_CONFIG = {
+      metaMensal: 31000,          // Valor total da meta
+      minhasEconomias: 2000,      // Seu valor economizado
+      mantenedoresMensal: 300,   // Arrecadado de mantenedores
+
+      // Links das duas fotos do topo (se você colocar foto1.jpg no Github, mude aqui)
+      fotoHeader1: "", 
+      fotoHeader2: "",
+
+      // PIX Oferta Única
+      pixUnico: {
+        copiaECola: "00020126440014BR.GOV.BCB.PIX0122schonwaldana@gmail.com5204000053039865802BR5920ANA ELOISA SCHONWALD6009SAO PAULO62290525YjNlMjE4NWUtMmVhNC00MjIzL63042F26",
+        imagemQrCode: "" // Nome da imagem se enviada ao GitHub (ex: "qr-unico.png")
+      },
+
+      // PIX Mensal (10 Meses)
+      pixMensal: {
+        copiaECola: "00020126620014BR.GOV.BCB.PIX0122schonwaldana@gmail.com0214(45) 9200146035204000053039865802BR5920ANA ELOISA SCHONWALD6009SAO PAULO62290525NzAyZjM2NjgtZTk4My00OGNmL6304EF75",
+        imagemQrCode: "" // Nome da imagem se enviada ao GitHub (ex: "qr-mensal.png")
+      },
+
+      // Lista de Pedidos de Oração
+      motivosOracao: [
+        "Pela preparação espiritual e saúde física durante o período de estudos.",
+        "Pelo provisionamento financeiro mês a mês.",
+        "Pelos professores e equipe do Instituto Palavra da Vida.",
+        "Pelas vidas que serão alcançadas durante as práticas ministeriais.",
+        "Pelo retorno futuro à Toledo e direcionamento vocacional."
+      ]
+    };
+
+    /* ========================================================================
+       LÓGICA AUTOMÁTICA
+       ======================================================================== */
+    function renderSite() {
+      const economias = SITE_CONFIG.minhasEconomias;
+      const mantenedores = SITE_CONFIG.mantenedoresMensal;
+      const meta = SITE_CONFIG.metaMensal;
+      const total = economias + mantenedores;
+      const faltante = Math.max(0, meta - total);
+      const percentual = Math.min(100, Math.round((total / meta) * 100));
+
+      document.getElementById('val-meta').innerText = meta.toLocaleString('pt-BR');
+      document.getElementById('val-economias').innerText = economias.toLocaleString('pt-BR');
+      document.getElementById('val-mantenedores').innerText = mantenedores.toLocaleString('pt-BR');
+      document.getElementById('val-faltante').innerText = faltante.toLocaleString('pt-BR');
+
+      setTimeout(() => {
+        document.getElementById('progress-bar').style.width = percentual + '%';
+      }, 300);
+
+      // Render QR Codes
+      const qrUnico = document.getElementById('qr-unico');
+      qrUnico.src = SITE_CONFIG.pixUnico.imagemQrCode.trim() !== "" 
+        ? SITE_CONFIG.pixUnico.imagemQrCode 
+        : "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(SITE_CONFIG.pixUnico.copiaECola);
+
+      const qrMensal = document.getElementById('qr-mensal');
+      qrMensal.src = SITE_CONFIG.pixMensal.imagemQrCode.trim() !== "" 
+        ? SITE_CONFIG.pixMensal.imagemQrCode 
+        : "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(SITE_CONFIG.pixMensal.copiaECola);
+
+      // Render Lista de Oração
+      const prayerList = document.getElementById('prayer-list');
+      prayerList.innerHTML = '';
+      SITE_CONFIG.motivosOracao.forEach(motivo => {
+        const li = document.createElement('li');
+        li.innerText = motivo;
+        prayerList.appendChild(li);
+      });
+    }
+
+    function switchTab(tab) {
+      const tabFin = document.getElementById('tab-financeiro');
+      const tabOra = document.getElementById('tab-oracao');
+      const btnFin = document.getElementById('btn-tab-financeiro');
+      const btnOra = document.getElementById('btn-tab-oracao');
+
+      if (tab === 'financeiro') {
+        tabFin.style.display = 'block';
+        tabOra.style.display = 'none';
+        btnFin.className = 'folder-tab active';
+        btnOra.className = 'folder-tab inactive';
+      } else {
+        tabFin.style.display = 'none';
+        tabOra.style.display = 'block';
+        btnFin.className = 'folder-tab inactive';
+        btnOra.className = 'folder-tab active';
+      }
+    }
+
+    function copyPix(tipo) {
+      const codigo = tipo === 'unico' ? SITE_CONFIG.pixUnico.copiaECola : SITE_CONFIG.pixMensal.copiaECola;
+      navigator.clipboard.writeText(codigo);
+      alert('Código PIX ' + (tipo === 'unico' ? 'para Oferta Única' : 'Mensal') + ' copiado com sucesso!');
+    }
+
+    document.addEventListener('DOMContentLoaded', renderSite);
+  </script>
+</body>
+</html>
